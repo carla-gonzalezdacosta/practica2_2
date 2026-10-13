@@ -39,7 +39,7 @@ He cambiado la contraseña como indicas en las instrucciones, usando este comand
 A partir de ahí he entrado en Oracle y alterado SYSTEM:
 
 ```sql
-ALTER USER SYSTEM IDENTIFIED BY "Contrase¤a";
+ALTER USER SYSTEM IDENTIFIED BY "Contraseña";
 ```
 
 ## 4. Entrar en Oracle y crear el usuario de trabajo
