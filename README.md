@@ -1,8 +1,6 @@
-#!/bin/bash
-
 # Práctica: Instalar tres SGBD
 
-## ASIR 2 - SGBD - Carla Gonz lez Da Costa
+## ASIR 2 - SGBD - Carla González Da Costa
 
 ### 12/10/2026
 
@@ -10,13 +8,14 @@
 
 He creado una VM nueva con sistema operativo Linux Mint 4GB RAM 2 CPUs y 250GB de disco:
 
-`images/conf_vm.png`
+`images/conf_vm.png
+
 2. Voy a descargar Podman:
 
-- sudo apt update`: actualiza paquetes y versiones.
-- sudo apt install podman`: descarga e instala podman.
-- sudo podman pull container-registry.oracle.com/database/free:23.5.0.0`: descarga la imagen desde la p gina oficial de oracle.
-- sudo podman images`: muestra todas las im genes de contenedores que se han descargado.
+- sudo apt update: actualiza paquetes y versiones.
+- sudo apt install podman: descarga e instala podman.
+- sudo podman pull container-registry.oracle.com/database/free:23.5.0.0: descarga la imagen desde la p gina oficial de oracle.
+- sudo podman images: muestra todas las im genes de contenedores que se han descargado.
 
 `images/primera_imagen.png`
 
@@ -45,26 +44,26 @@ ALTER USER SYSTEM IDENTIFIED BY "Contrase¤a";
 
 ## 4. Entrar en Oracle y crear el usuario de trabajo
 
-- `sudo podman exec -it cont-oracle /bin/bash`  me aparece bash-4.4$ y significa que estoy dentro del contenedor Oracle.
-- `exit`
-- `sudo podman exec -it cont-oracle sqlplus / as sysdba`  con este comando entro en oracle, compruebo la PDB y creo el usuario.
-  - `SHOW PDBS`
+- sudo podman exec -it cont-oracle /bin/bash  me aparece bash-4.4$ y significa que estoy dentro del contenedor Oracle.
+- exit
+- sudo podman exec -it cont-oracle sqlplus / as sysdba  con este comando entro en oracle, compruebo la PDB y creo el usuario.
+  - SHOW PDBS
 
 `images/segunda.png`
 
 Hay dos PDB, una es la plantilla (speed) y la otra es la primera.
 
-- `ALTER SESSION SET CONTAINER = FREEPDB1;`
-- `CREATE USER orauser IDENTIFIED BY "TU_CLAVE";`
-- `GRANT CREATE SESSION, CREATE TABLE TO orauser;`
-- `ALTER USER orauser QUOTA 100M ON USERS;`
-- `EXIT`
+- ALTER SESSION SET CONTAINER = FREEPDB1;
+- CREATE USER orauser IDENTIFIED BY "TU_CLAVE";
+- GRANT CREATE SESSION, CREATE TABLE TO orauser;
+- ALTER USER orauser QUOTA 100M ON USERS;
+- EXIT
 
 `images/tercera.png`
 
 He alterado la sesi¢n FREEPDB1 para poder crear un usuario en esa base de datos, llamado orauser y le he asignado espacio de almacenamiento de 100MB para guardar datos como por ejemplo tablas, etc.
 
-- `sudo podman exec -it cont-oracle sqlplus orauser@//localhost:1521/FREEPDB1`  compruebo la conexi¢n a ese usuario (orauser).
+- sudo podman exec -it cont-oracle sqlplus orauser@//localhost:1521/FREEPDB1  compruebo la conexi¢n a ese usuario (orauser).
 
 Hab¡a tenido una incidencia porque al crear el usuario no he introducido el comando de `CREATE TABLE TO orauser;` por lo tanto al intentar conectarme con ese usuario no me dejaba, pero ya lo he solucionado al entrar en esa base de datos y poner el comando, alterando la sesi¢n antes.
 
