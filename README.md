@@ -222,4 +222,4 @@ Comprobamos que he conseguido entrar desde mi VM cliente a PostgreSQL.
 
 He puesto este comando `mariadb -h 192.168.56.101 -u muser -p dbm` y no me ha funcionado porque me ponía error: ssl is required. Por ello, he buscado qué‚ significaba ese error y me ha indicado que debía ejecutar este otro comando `mariadb --disable-ssl -h 192.168.56.101 -u muser -p dbm`, añadí la opción disable para comprobar si podía acceder a mariadb sin utilizar ssl (conexión cifrada) y ahí me funcionó correctamente y pude conectarme a MariaDB.
 
-![Conexión desde cliente a MariaDB](image/conexion_cliente_mariadb.png)
+![Conexión desde cliente a MariaDB](images\conexion_cliente_mariadb.png)
